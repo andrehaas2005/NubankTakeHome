@@ -6,10 +6,7 @@ public protocol LinkServiceProtocol {
   func shorten(url: String) async throws -> AliasResponse
   func fetchOriginalURL(alias: String) async throws -> UrlResponse
 }
-
-/// Implementação concreta do serviço.
-/// Ele apenas orquestra chamadas para o módulo Networking.
-/// Toda validação, normalização e regras extras ficam na Engine.
+struct Body: Encodable { let url: String }
 final class LinkService: LinkServiceProtocol {
   
   private let client: NetworkClientProtocol
@@ -18,18 +15,11 @@ final class LinkService: LinkServiceProtocol {
     self.client = client
   }
   
-  // POST /api/alias
   func shorten(url: String) async throws -> AliasResponse {
-    struct Body: Encodable {
-      let url: String
-    }
-    
-    let body = Body(url: url)
-    return try await client.post("/api/alias", body: body)
+    try await client.post(.shorten, body: Body(url: url))
   }
   
-  // GET /api/alias/{alias}
   func fetchOriginalURL(alias: String) async throws -> UrlResponse {
-    try await client.get("/api/alias/\(alias)")
+    try await client.get(.original(alias))
   }
 }

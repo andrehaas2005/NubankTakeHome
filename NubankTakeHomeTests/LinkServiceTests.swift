@@ -1,7 +1,7 @@
 import XCTest
+@testable import Networking
+@testable import Core
 @testable import NubankTakeHome
-import Networking
-import Core
 
 final class LinkServiceTests: XCTestCase {
   
@@ -20,61 +20,51 @@ final class LinkServiceTests: XCTestCase {
     super.tearDown()
   }
   
-  // MARK: - Shorten
+  // MARK: - shorten()
   
-  func test_shorten_callsCorrectEndpoint_andSendsBody() async throws {
-    // Prepare mock result
-    let expected = AliasResponse(
-      alias: "abc123",
-      links: .init(self: "https://full.com", short: "https://short.com")
-    )
+  func test_shorten_success() async throws {
+    let expected = AliasResponse.fixed()
+
+    client.mode = .success(expected)
     
-    client.postResult = expected
-    
-    // Run
     let result = try await sut.shorten(url: "https://apple.com")
     
-    // Verify
     XCTAssertEqual(result.alias, expected.alias)
-    XCTAssertEqual(client.receivedPostPath, "/api/alias")
+    XCTAssertEqual(client.lastEndpoint, .shorten)
     
-    // Body check
-    guard let body = client.receivedPostBody else {
-      return XCTFail("Body não recebido ou não convertido")
-    }
-    
-    XCTAssertEqual(body["url"] as? String, "https://apple.com")
+    let body = client.lastBody as? Body
+    XCTAssertEqual(body?.url, "https://apple.com")
   }
   
-  func test_shorten_propagatesError() async {
-    client.postError = NetworkError.httpError(500)
+  func test_shorten_failure() async {
+    client.mode = .failure(NetworkError.httpError(500))
     
     do {
       _ = try await sut.shorten(url: "https://apple.com")
-      XCTFail("Deveria ter lançado erro")
+      XCTFail("Expected error not thrown")
     } catch {
       XCTAssertTrue(error is NetworkError)
     }
   }
   
-  // MARK: - fetchOriginalURL
+  // MARK: - fetchOriginalURL()
   
-  func test_fetch_callsCorrectEndpoint_andReturnsDecoded() async throws {
-    let expected = UrlResponse(url: "https://google.com")
-    client.getResult = expected
+  func test_fetchOriginal_success() async throws {
+    let expected = UrlResponse(url: "https://full.com")
+    client.mode = .success(expected)
     
     let result = try await sut.fetchOriginalURL(alias: "abc123")
     
     XCTAssertEqual(result.url, expected.url)
-    XCTAssertEqual(client.receivedGetPath, "/api/alias/abc123")
+    XCTAssertEqual(client.lastEndpoint, .original("abc123"))
   }
   
-  func test_fetch_propagatesError() async {
-    client.getError = NetworkError.invalidURL
+  func test_fetchOriginal_failure() async {
+    client.mode = .failure(NetworkError.unknown)
     
     do {
-      _ = try await sut.fetchOriginalURL(alias: "xyz")
-      XCTFail("Era esperado erro")
+      _ = try await sut.fetchOriginalURL(alias: "abc123")
+      XCTFail("Expected error not thrown")
     } catch {
       XCTAssertTrue(error is NetworkError)
     }
