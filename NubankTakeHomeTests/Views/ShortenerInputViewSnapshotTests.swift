@@ -1,11 +1,3 @@
-//
-//  ShortenerInputViewSnapshotTests.swift
-//  NubankTakeHome
-//
-//  Created by Andre  Haas on 06/12/25.
-//
-
-
 import XCTest
 @testable import NubankTakeHome
 

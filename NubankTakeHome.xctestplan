@@ -1,55 +1,22 @@
 {
   "configurations" : [
     {
-      "id" : "4CADFD02-13FF-44B5-B19F-1722C47F42A5",
-      "name" : "Test Scheme Action",
+      "id" : "CA9EC4E4-AB52-4959-800E-F4B1DE7362DD",
+      "name" : "Configuration 1",
       "options" : {
 
       }
     }
   ],
   "defaultOptions" : {
-    "codeCoverage" : {
-      "targets" : [
-        {
-          "containerPath" : "container:NubankTakeHome.xcodeproj",
-          "identifier" : "793911282EE3460E0084E0DA",
-          "name" : "NubankTakeHome"
-        },
-        {
-          "containerPath" : "container:..\/Core",
-          "identifier" : "Core",
-          "name" : "Core"
-        },
-        {
-          "containerPath" : "container:..\/Networking",
-          "identifier" : "Networking",
-          "name" : "Networking"
-        }
-      ]
-    },
-    "performanceAntipatternCheckerEnabled" : true,
-    "targetForVariableExpansion" : {
-      "containerPath" : "container:NubankTakeHome.xcodeproj",
-      "identifier" : "793911282EE3460E0084E0DA",
-      "name" : "NubankTakeHome"
-    }
+    "testTimeoutsEnabled" : true
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:NubankTakeHome.xcodeproj",
         "identifier" : "7939113E2EE346100084E0DA",
         "name" : "NubankTakeHomeTests"
-      }
-    },
-    {
-      "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:NubankTakeHome.xcodeproj",
-        "identifier" : "793911482EE346100084E0DA",
-        "name" : "NubankTakeHomeUITests"
       }
     }
   ],

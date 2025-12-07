@@ -1,11 +1,3 @@
-//
-//  ShortenerViewControllerSnapshotTests.swift
-//  NubankTakeHome
-//
-//  Created by Andre  Haas on 06/12/25.
-//
-
-
 import XCTest
 import SnapshotTesting
 @testable import NubankTakeHome
@@ -16,8 +8,6 @@ final class ShortenerViewControllerSnapshotTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
-    diffTool = .default
-    SnapshotTesting.isRecording = false
   }
   
   // MARK: - Helpers

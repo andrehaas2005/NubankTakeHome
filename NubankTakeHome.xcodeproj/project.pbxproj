@@ -12,6 +12,7 @@
 		79174FA22EE5135C002B76CC /* SnapshotTestingCustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 79174FA12EE5135C002B76CC /* SnapshotTestingCustomDump */; };
 		794CB8232EE4DBE600AD5F23 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 794CB8222EE4DBE600AD5F23 /* Networking */; };
 		794CB8252EE4DBE600AD5F23 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 794CB8242EE4DBE600AD5F23 /* Core */; };
+		79B5E7E32EE637C400431FBD /* NubankTakeHome.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 79B5E7E22EE637C400431FBD /* NubankTakeHome.xctestplan */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +36,7 @@
 		793911292EE3460E0084E0DA /* NubankTakeHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NubankTakeHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7939113F2EE346100084E0DA /* NubankTakeHomeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NubankTakeHomeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		793911492EE346100084E0DA /* NubankTakeHomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NubankTakeHomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7961934E2EE4C650003A2125 /* NubankTakeHome.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = NubankTakeHome.xctestplan; sourceTree = "<group>"; };
+		79B5E7E22EE637C400431FBD /* NubankTakeHome.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = NubankTakeHome.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -102,7 +103,7 @@
 		793911202EE3460E0084E0DA = {
 			isa = PBXGroup;
 			children = (
-				7961934E2EE4C650003A2125 /* NubankTakeHome.xctestplan */,
+				79B5E7E22EE637C400431FBD /* NubankTakeHome.xctestplan */,
 				7939112B2EE3460E0084E0DA /* NubankTakeHome */,
 				793911422EE346100084E0DA /* NubankTakeHomeTests */,
 				7939114C2EE346100084E0DA /* NubankTakeHomeUITests */,
@@ -259,6 +260,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79B5E7E32EE637C400431FBD /* NubankTakeHome.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,11 +1,3 @@
-//
-//  AppCoordinator.swift
-//  NubankTakeHome
-//
-//  Created by Andre  Haas on 05/12/25.
-//
-
-
 import UIKit
 
 final class AppCoordinator {
