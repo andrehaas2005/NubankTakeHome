@@ -7,13 +7,13 @@ enum AppEnvironment {
   var baseURL: String {
     switch self {
     case .dev:
-      return "https://dev.url-shortener.com/api"
+       "https://dev.url-shortener.com/api"
     case .stage:
-      return "https://stage.url-shortener.com/api"
+       "https://stage.url-shortener.com/api"
     case .prod:
-      return "https://url-shortener-server.onrender.com/api"
+       "https://url-shortener-server.onrender.com"
     case .mock:
-      return "http://localhost:3000/api"
+       "http://localhost:3000/api"
     }
   }
 }

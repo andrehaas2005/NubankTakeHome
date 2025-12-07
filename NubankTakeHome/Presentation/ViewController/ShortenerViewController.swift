@@ -6,6 +6,7 @@ final class ShortenerViewController: UIViewController {
   
   // MARK: - Dependencies
   private let viewModel: ShortenerViewModel
+  private let router: ShortenerRouting
   private var cancellables = Set<AnyCancellable>()
   
   // MARK: - UI
@@ -14,12 +15,15 @@ final class ShortenerViewController: UIViewController {
   private let listView = ShortenerListView()
   
   // MARK: - Init
-  init(viewModel: ShortenerViewModel) {
+  init(viewModel: ShortenerViewModel,
+       router: ShortenerRouting) {
     self.viewModel = viewModel
+    self.router = router
     super.init(nibName: nil, bundle: nil)
     title = "Encurtador"
   }
   
+  @available(*, unavailable)
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -101,9 +105,7 @@ final class ShortenerViewController: UIViewController {
   
   // MARK: - Error presentation
   private func presentError(_ message: String) {
-    let alert = UIAlertController(title: "Ops", message: message, preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .default))
-    present(alert, animated: true)
+    router.showError(message: message, in: self)
   }
 }
 
@@ -125,11 +127,9 @@ extension ShortenerViewController: UITableViewDataSource, UITableViewDelegate {
     ) as! ShortenerListCell
     
     cell.configure(with: item)
-    cell.onCopy = { copiedURL in
-      // futuramente: Toast
-      print("Copied: \(copiedURL)")
+    cell.onCopy = { [weak self] _ in
+      self?.router.showToast(in: self)
     }
-    
     return cell
   }
   

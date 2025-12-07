@@ -25,14 +25,15 @@ final class ShortenerViewControllerSnapshotTests: XCTestCase {
   @MainActor private func makeSUT(
     links: [AliasResponse] = [],
     isLoading: Bool = false,
-    error: String? = nil
+    error: String? = nil,
+    router: ShortenerRouting = ShortenerRoutingMock()
   ) -> ShortenerViewController {
     
     let engine = ShortenerEngineMock()
     let repo   = LinkRepositoryMock()
     let adapter = ShortenerAdapter()
     if ((error?.isEmpty) == nil) {
-      engine.mode = .failure(CoreError.invalidInput("\(error)"))
+      engine.mode = .failure(CoreError.invalidInput("\(String(describing: error))"))
     }
     repo.initial = links
     
@@ -42,7 +43,7 @@ final class ShortenerViewControllerSnapshotTests: XCTestCase {
       adapter: adapter
     )
     
-    return ShortenerViewController(viewModel: vm)
+    return ShortenerViewController(viewModel: vm, router: router)
   }
   
   // MARK: - Tests
@@ -81,8 +82,8 @@ final class ShortenerViewControllerSnapshotTests: XCTestCase {
   }
   
   @MainActor func test_snapshot_withErrorPresented() {
-    
-    let sut = makeSUT(error: "Algo deu errado...")
+    let navigation = UINavigationController()
+    let sut = makeSUT(error: "Algo deu errado...", router: ShortenerRouter(navigationController: navigation))
     sut.view.frame = CGRect(origin: .zero, size: SnapshotConfig.device.size ?? .zero)
     sut.view.layoutIfNeeded()
     
@@ -92,3 +93,4 @@ final class ShortenerViewControllerSnapshotTests: XCTestCase {
     SnapshotConfig.assertSnapshot(vc: sut)
   }
 }
+

@@ -41,7 +41,7 @@ final class DIContainer {
         )
     }
 
-    func makeShortenerViewController(router: ShortenerRouter) -> UIViewController {
-        ShortenerViewController(viewModel: makeShortenerViewModel())
+    func makeShortenerViewController(router: ShortenerRouting) -> UIViewController {
+      ShortenerViewController(viewModel: makeShortenerViewModel(), router: router)
     }
 }

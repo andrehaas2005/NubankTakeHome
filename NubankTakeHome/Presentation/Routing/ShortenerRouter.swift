@@ -4,6 +4,7 @@ import Core
 protocol ShortenerRouting {
   func openShortURL(_ alias: AliasResponse)
   func showError(message: String, in controller: UIViewController?)
+  func showToast(in controller: UIViewController?)
 }
 
 final class ShortenerRouter: ShortenerRouting {
@@ -19,9 +20,13 @@ final class ShortenerRouter: ShortenerRouting {
     UIApplication.shared.open(url)
   }
   
+  func showToast(in controller: UIViewController?) {
+    controller?.showToast("Link copiado!")
+  }
+  
   func showError(message: String, in controller: UIViewController?) {
     let alert = UIAlertController(
-      title: "Erro",
+      title: "Ops",
       message: message,
       preferredStyle: .alert
     )
